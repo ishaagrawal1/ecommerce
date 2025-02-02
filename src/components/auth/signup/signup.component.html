@@ -1,0 +1,142 @@
+<div class="flex justify-center items-center h-full">
+  <div class="bg-gray-700 h-fit rounded-lg p-8 w-fit flex flex-col gap-4">
+    <div class="flex justify-between">
+      <img
+        class="w-36 h-auto object-contain invert"
+        src="https://www.pngkit.com/png/full/364-3642224_clarity-ecommerce-logo-logo-e-commerce-png.png"
+        alt=""
+      />
+      <p-button
+        icon="pi pi-arrow-up-right"
+        label="Log In"
+        (onClick)="this.router.navigateByUrl('login')"
+        [text]="true"
+        [plain]="true"
+      ></p-button>
+    </div>
+    <h1 class="font3 text-3xl">Sign Up</h1>
+    <form
+      [formGroup]="SignupForm"
+      (submit)="onSubmit()"
+      class="w-full flex flex-col gap-6"
+    >
+      <div class="flex justify-between gap-4">
+        <div>
+          <p-floatLabel>
+            <input class="w-full" pInputText id="na" formControlName="name" />
+            <label for="Full Name">Full Name</label>
+          </p-floatLabel>
+          @if (SignupForm.controls.name.invalid &&
+          SignupForm.controls.name.touched) {
+          <p class="text-rose-500">Field is required</p>
+          }
+        </div>
+        <div>
+          <p-floatLabel>
+            <input class="w-full" pInputText id="em" formControlName="email" />
+            <label for="Email">Email</label>
+          </p-floatLabel>
+          @if (SignupForm.controls.email.invalid &&
+          SignupForm.controls.email.touched) {
+          <p class="text-rose-500">Field is required</p>
+          }
+        </div>
+      </div>
+
+      <div class="flex justify-between gap-4">
+        <div>
+          <p-floatLabel>
+            <input class="w-full" pInputText id="ph" formControlName="phone" />
+
+            <label for="phone">Phone</label>
+          </p-floatLabel>
+          @if (SignupForm.controls.phone.invalid &&
+          SignupForm.controls.phone.touched) {
+          <p class="text-rose-500">Field is required</p>
+          }
+        </div>
+
+        <div>
+          <p-floatLabel>
+            <input
+              class="w-full"
+              pInputText
+              id="username"
+              formControlName="username"
+            />
+            <label for="username">Username</label>
+          </p-floatLabel>
+          @if (SignupForm.controls.username.invalid &&
+          SignupForm.controls.username.touched) {
+          <p class="text-rose-500">Field is required</p>
+          }
+        </div>
+      </div>
+
+      <div class="flex justify-between gap-4">
+        <div>
+          <p-floatLabel>
+            <input
+              class="w-full"
+              pInputText
+              type="password"
+              id="pa"
+              formControlName="password"
+            />
+            <label for="password">Password</label>
+          </p-floatLabel>
+          @if (SignupForm.controls.password.invalid &&
+          SignupForm.controls.password.touched) {
+          <p class="text-rose-500">Field is required</p>
+          }
+        </div>
+        <div>
+          <p-floatLabel>
+            <input
+              class="w-full"
+              pInputText
+              type="password"
+              id="cp"
+              formControlName="confirmpassword"
+            />
+            <label for="confirm password">Confirm Password</label>
+          </p-floatLabel>
+          @if (SignupForm.errors?.['pMatchError'] &&
+          SignupForm.controls.confirmpassword.touched) {
+          <p class="text-rose-500">Password does not match</p>
+          }
+        </div>
+      </div>
+
+      <div class="flex gap-4 justify-between">
+        <div class="flex gap-4 justify-between w-full">
+          <div class="flex mt-10">
+            <p-selectButton
+              formControlName="typeofuser"
+              [options]="[
+                { label: 'User', value: 'user' },
+                { label: 'Seller', value: 'seller' }
+              ]"
+              optionLabel="label"
+              optionValue="value"
+            />
+          </div>
+          @if(SignupForm.controls.typeofuser.invalid &&
+          SignupForm.controls.typeofuser.touched){
+          <p class="text-red-500">please select an option</p>
+          }
+          <div class="flex mt-10 flex-col">
+            <p-button
+              [loading]="isLoading"
+              type="submit"
+              [disabled]="SignupForm.invalid"
+              [rounded]="true"
+              label="Sign Up"
+              [raised]="true"
+            />
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

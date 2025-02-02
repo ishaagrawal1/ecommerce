@@ -1,0 +1,85 @@
+<div class="flex justify-between items-center p-6 border-y border-white gap-2">
+  <h1 class="text-3xl font-bold">Manage Users</h1>
+  <p-button label="Add New" icon="pi pi-plus" [rounded]="true" />
+</div>
+<div class="px-6">
+  <p-table [value]="data.users" styleClass="p-datatable-sm">
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Sr No.</th>
+        <th pSortableColumn="name">Name <p-sortIcon field="name" /></th>
+        <th pSortableColumn="name">Email <p-sortIcon field="email" /></th>
+        <th pSortableColumn="typeofuser">
+          TypeOfUser <p-sortIcon field="typeofuser" />
+        </th>
+        <th pSortableColumn="isApproved">
+          Approved <p-sortIcon field="isApproved" />
+        </th>
+        <th pSortableColumn="updatedAt">Date <p-sortIcon field="date" /></th>
+        <th>Actions</th>
+      </tr>
+    </ng-template>
+    <ng-template let-ri="rowIndex" pTemplate="body" let-user>
+      <tr>
+        <td>{{ page * rows - rows + ri + 1 }}</td>
+        <td>{{ user.name }}</td>
+        <td>{{ user.email }}</td>
+        <td>{{ user.typeofuser }}</td>
+        <td>
+          <p-tag
+            [value]="user.isApproved ? 'Approved' : 'Not Approved'"
+            [severity]="user.isApproved ? 'success' : 'danger'"
+            [rounded]="true"
+          />
+        </td>
+        <td>{{ user.updatedAt | date }}</td>
+
+        <td class="flex gap-2">
+          <p-button label="Edit" size="small" [rounded]="true" />
+          <p-button
+            label="Delete"
+            size="small"
+            [rounded]="true"
+            severity="danger"
+          />
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+  <br />
+  <div class="flex flex-col items-center">
+    <!-- Help text -->
+    <span class="text-sm text-gray-700 dark:text-gray-400">
+      Showing
+      <span class="font-semibold text-gray-900 dark:text-white">{{
+        page * rows - rows + 1
+      }}</span>
+      to
+      <span clpaass="font-semibold text-gray-900 dark:text-white">{{
+        page * rows
+      }}</span>
+      of
+      <span class="font-semibold text-gray-900 dark:text-white">{{
+        data.total
+      }}</span>
+      Entries
+    </span>
+    <!-- Buttons -->
+    <div class="inline-flex mt-2 xs:mt-0">
+      <button
+        (click)="previous()"
+        [disabled]="page === 1"
+        class="flex items-center justify-center px-3 h-8 text-sm font-medium text-white bg-gray-800 rounded-s hover:bg-gray-900 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+      >
+        Prev
+      </button>
+      <button
+        (click)="next()"
+        [disabled]="page === data.totalPages"
+        class="flex items-center justify-center px-3 h-8 text-sm font-medium text-white bg-gray-800 border-0 border-s border-gray-700 rounded-e hover:bg-gray-900 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+      >
+        Next
+      </button>
+    </div>
+  </div>
+</div>

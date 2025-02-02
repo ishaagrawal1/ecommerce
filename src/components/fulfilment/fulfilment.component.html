@@ -1,0 +1,96 @@
+<div class="flex justify-between items-center p-6 border-y border-white gap-2">
+  <h1 class="text-3xl font-bold">Manage fulfillment</h1>
+  <p-button label="Add New" icon="pi pi-plus" [rounded]="true" />
+</div>
+<div class="px-6">
+  <p-table [value]="data.orders" styleClass="p-datatable-sm">
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Sr No.</th>
+        <th>Products</th>
+        <th>Sent</th>
+        <th>Price</th>
+        <th pSortableColumn="status">Status <p-sortIcon field="status" /></th>
+        <th pSortableColumn="updatedAt">Date <p-sortIcon field="date" /></th>
+        <th>Actions</th>
+      </tr>
+    </ng-template>
+    <ng-template let-ri="rowIndex" pTemplate="body" let-order>
+      <tr>
+        <td>{{ page * result - result + ri + 1 }}</td>
+        <td>
+          <div class="flex flex-col gap-4">
+            <div class="flex gap-4" *ngFor="let item of order.productsOrdered">
+              <img
+                [src]="item.product.image[0]"
+                alt=""
+                class="h-8 w-8 object-cover"
+              />
+              <span>{{
+                item.product.name +
+                  " - " +
+                  item.product.variation.type +
+                  " " +
+                  item.product.variation.value +
+                  " x" +
+                  item.quantity
+              }}</span>
+            </div>
+          </div>
+        </td>
+        <td>
+          <div class="flex flex-col">
+            <div class="flex gap-4" *ngFor="let item of order.productsSent">
+              <span>{{ " x" + item.quantity }}</span>
+            </div>
+          </div>
+        </td>
+        <td>{{ order.totalPayable | currency : "INR" }}</td>
+        <td>
+          <p-tag [value]="order.status" severity="info" [rounded]="true" />
+        </td>
+        <td>{{ order.updatedAt | date }}</td>
+
+        <td class=" ">
+          <p-button label="Edit" size="small" [rounded]="true" />
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+  <br />
+  <div class="flex flex-col items-center">
+    <!-- Help text -->
+    <span class="text-sm text-gray-700 dark:text-gray-400">
+      Showing
+      <span class="font-semibold text-gray-900 dark:text-white">{{
+        page * result - result + 1
+      }}</span>
+      to
+      <span clpaass="font-semibold text-gray-900 dark:text-white">{{
+        page * result
+      }}</span>
+      of
+      <span class="font-semibold text-gray-900 dark:text-white">{{
+        data.total
+      }}</span>
+      Entries
+    </span>
+    <!-- Buttons -->
+    <div class="inline-flex mt-2 xs:mt-0">
+      <button
+        (click)="prev()"
+        [disabled]="page === 1"
+        class="flex items-center justify-center px-3 h-8 text-sm font-medium text-white bg-gray-800 rounded-s hover:bg-gray-900 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+      >
+        Prev
+      </button>
+      <button
+        (click)="next()"
+        [disabled]="page === data.totalPages"
+        class="flex items-center justify-center px-3 h-8 text-sm font-medium text-white bg-gray-800 border-0 border-s border-gray-700 rounded-e hover:bg-gray-900 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+      >
+        Next
+      </button>
+    </div>
+  </div>
+</div>

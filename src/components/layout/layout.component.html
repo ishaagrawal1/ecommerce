@@ -1,0 +1,19 @@
+<div class="fixed top-0 left-0 w-dvw h-svh bg-gray-800 flex">
+  <aside
+    class="h-full bg-slate-900 w-fit px-4 flex flex-col items-center gap-4"
+  >
+    <img
+      class="w-80 p-4 invert"
+      src="https://www.pngkit.com/png/full/364-3642224_clarity-ecommerce-logo-logo-e-commerce-png.png"
+      alt=""
+    />
+    <p-panelMenu
+      class="w-full overflow-y-auto"
+      [model]="menuItemArr"
+    ></p-panelMenu>
+    <p-panelMenu class="w-full mt-auto" [model]="account"></p-panelMenu>
+  </aside>
+  <div class="h-full w-full overflow-y-auto">
+    <router-outlet></router-outlet>
+  </div>
+</div>

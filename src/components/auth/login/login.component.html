@@ -1,0 +1,65 @@
+<div class="flex justify-center items-center h-full">
+  <div class="bg-gray-700 h-fit rounded-lg p-8 w-fit flex flex-col gap-4">
+    <div class="flex justify-between">
+      <img
+        class="w-40 h-auto invert object-contain"
+        src="https://www.pngkit.com/png/full/364-3642224_clarity-ecommerce-logo-logo-e-commerce-png.png"
+        alt=""
+      />
+      <p-button
+        icon="pi pi-arrow-up-right"
+        label="Open Account"
+        (onClick)="this.router.navigateByUrl('signup')"
+        [text]="true"
+        [plain]="true"
+      ></p-button>
+    </div>
+    <h1 class="font3 text-3xl">Log In</h1>
+    <form
+      [formGroup]="LoginForm"
+      (submit)="onSubmit()"
+      class="flex flex-col gap-8 font1 w-96 mt-4"
+    >
+      <p-floatLabel>
+        <input
+          formControlName="username"
+          class="w-full"
+          pInputText
+          id="username"
+        />
+        <label for="username">Username</label>
+      </p-floatLabel>
+      @if (LoginForm.controls.username.invalid &&
+      LoginForm.controls.username.touched) {
+      <p class="-mt-8 text-red-500">Username is required</p>
+      }
+
+      <p-floatLabel>
+        <p-password
+          [toggleMask]="true"
+          formControlName="password"
+          [feedback]="false"
+          [style]="{ width: '100%' }"
+          [inputStyle]="{ width: '100%' }"
+        />
+        <label for="password">Password</label>
+      </p-floatLabel>
+      @if (LoginForm.controls.password.invalid &&
+      LoginForm.controls.password.touched) {
+      <p class="-mt-8 text-red-500">Password is required</p>
+      }
+
+      <p class="-mt-8 text-sm cursor-pointer">Forget Password?</p>
+
+      <div class="flex">
+        <p-button
+          [loading]="isLoading"
+          [disabled]="LoginForm.invalid"
+          type="submit"
+          label="login"
+          [rounded]="true"
+        />
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,1 +1,19 @@
-/* You can add global styles to this file, and also import other style files */
+@import "primeicons/primeicons.css";
+@import "../node_modules/tailwindcss/base.css" layer(tailwindcss);
+@import "../node_modules/tailwindcss/components.css" layer(tailwindcss);
+@import "../node_modules/tailwindcss/utilities.css" layer(tailwindcss);
+@import "primeng/resources/themes/lara-dark-purple/theme.css";
+@import "primeng/resources/primeng.css";
+@import url("https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&family=Playwrite+AU+SA:wght@100..400&family=SUSE:wght@100..800&display=swap");
+
+.font1 {
+  font-family: "SUSE", serif;
+}
+
+.font2 {
+  font-family: "Playwrite AU SA", serif;
+}
+
+.font3 {
+  font-family: "Merriweather", serif;
+}
